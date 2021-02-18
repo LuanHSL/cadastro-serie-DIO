@@ -9,7 +9,7 @@ namespace DIO.Series
 		private string Titulo { get; set; }
 		private string Descricao { get; set; }
 		private int Ano { get; set; }
-        private bool Ativo {get; set;}
+        private bool Inativo {get; set;}
 
         // Métodos
 		public Serie(int id, Genero genero, string titulo, string descricao, int ano)
@@ -19,7 +19,7 @@ namespace DIO.Series
 			this.Titulo = titulo;
 			this.Descricao = descricao;
 			this.Ano = ano;
-            this.Ativo = false;
+            this.Inativo = false;
 		}
 
         public override string ToString()
@@ -30,7 +30,7 @@ namespace DIO.Series
             retorno += "Titulo: " + this.Titulo + Environment.NewLine;
             retorno += "Descrição: " + this.Descricao + Environment.NewLine;
             retorno += "Ano de Início: " + this.Ano + Environment.NewLine;
-            retorno += "Excluido: " + this.Ativo;
+            retorno += "Inativado: " + this.Inativo;
 			return retorno;
 		}
 
@@ -45,10 +45,14 @@ namespace DIO.Series
 		}
         public bool RetornarAtivo()
 		{
-			return this.Ativo;
+			return this.Inativo;
 		}
         public void Inativar() {
-            this.Ativo = true;
+            this.Inativo = true;
         }
-    }
+		public void Ativar()
+		{
+			this.Inativo = false;
+		}
+	}
 }

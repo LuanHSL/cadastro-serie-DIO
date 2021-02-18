@@ -7,7 +7,8 @@ namespace DIO.Series.Interfaces
         List<T> Lista();
         T RetornaPorId(int id);        
         void Insere(T entidade);        
-        void Inativar(int id);        
+        void Inativar(int id);
+        void Ativar(int id);
         void Atualiza(int id, T entidade);
         int ProximoId();
     }

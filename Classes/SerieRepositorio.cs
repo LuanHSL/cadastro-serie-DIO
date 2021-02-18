@@ -16,7 +16,10 @@ namespace DIO.Series
 		{
 			listaSerie[id].Inativar();
 		}
-
+		public void Ativar(int id)
+		{
+			listaSerie[id].Ativar();
+		}
 		public void Insere(Serie objeto)
 		{
 			listaSerie.Add(objeto);
