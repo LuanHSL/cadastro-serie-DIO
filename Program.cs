@@ -31,6 +31,9 @@ namespace DIO.Series
 					case "6":
 						AtivarSerie();
 						break;
+					case "7":
+						ListarSeriesInativas();
+						break;
 					case "C":
 						Console.Clear();
 						break;
@@ -62,8 +65,10 @@ namespace DIO.Series
 			foreach (var serie in lista)
 			{
                 var excluido = serie.RetornarAtivo();
-                
-				Console.WriteLine("#ID {0}: - {1} {2}", serie.retornaId(), serie.retornaTitulo(), (excluido ? "*Excluído*" : ""));
+                if(!excluido)
+                {
+					Console.WriteLine("#ID {0}: - {1}", serie.retornaId(), serie.retornaTitulo());
+                }
 			}
 		}
 
@@ -102,8 +107,7 @@ namespace DIO.Series
 		//Caso3
 		private static void AtualizarSerie()
 		{
-			Console.Write("Digite o id da série: ");
-			int indiceSerie = int.Parse(Console.ReadLine());
+			int indiceSerie = RecebendoIdSerie();
 
 			var serie = repositorio.RetornaPorId(indiceSerie);
 
@@ -130,31 +134,29 @@ namespace DIO.Series
 						throw new ArgumentOutOfRangeException();
 				}
 			}
-				// https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getvalues?view=netcore-3.1
-				// https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getname?view=netcore-3.1
-				foreach (int i in Enum.GetValues(typeof(Genero)))
-				{
-					Console.WriteLine("{0}-{1}", i, Enum.GetName(typeof(Genero), i));
-				}
-				Console.Write("Digite o gênero entre as opções acima: ");
-				int entradaGenero = int.Parse(Console.ReadLine());
+			// https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getvalues?view=netcore-3.1
+			// https://docs.microsoft.com/pt-br/dotnet/api/system.enum.getname?view=netcore-3.1
+			foreach (int i in Enum.GetValues(typeof(Genero)))
+			{
+				Console.WriteLine("{0}-{1}", i, Enum.GetName(typeof(Genero), i));
+			}
+			Console.Write("Digite o gênero entre as opções acima: ");
+			int entradaGenero = int.Parse(Console.ReadLine());
 
-				Console.Write("Digite o Título da Série: ");
-				string entradaTitulo = Console.ReadLine();
+			Console.Write("Digite o Título da Série: ");
+			string entradaTitulo = Console.ReadLine();
 
-				Console.Write("Digite o Ano de Início da Série: ");
-				int entradaAno = int.Parse(Console.ReadLine());
+			Console.Write("Digite o Ano de Início da Série: ");
+			int entradaAno = int.Parse(Console.ReadLine());
 
-				Console.Write("Digite a Descrição da Série: ");
-				string entradaDescricao = Console.ReadLine();
-
-				Serie atualizaSerie = new Serie(id: indiceSerie,
-											genero: (Genero)entradaGenero,
-											titulo: entradaTitulo,
-											ano: entradaAno,
-											descricao: entradaDescricao);
-
-				repositorio.Atualiza(indiceSerie, atualizaSerie);
+			Console.Write("Digite a Descrição da Série: ");
+			string entradaDescricao = Console.ReadLine();
+			Serie atualizaSerie = new Serie(id: indiceSerie,
+										genero: (Genero)entradaGenero,
+										titulo: entradaTitulo,
+										ano: entradaAno,
+										descricao: entradaDescricao);
+			repositorio.Atualiza(indiceSerie, atualizaSerie);
 
 			
 
@@ -163,8 +165,7 @@ namespace DIO.Series
 		//Caso 4
 		private static void InativarSerie()
 		{
-			Console.Write("Digite o id da série: ");
-			int indiceSerie = int.Parse(Console.ReadLine());
+			int indiceSerie = RecebendoIdSerie();
 
 			repositorio.Inativar(indiceSerie);
 		}
@@ -172,24 +173,50 @@ namespace DIO.Series
 		//Caso 5
 		private static void VisualizarSerie()
 		{
-			Console.Write("Digite o id da série: ");
-			int indiceSerie = int.Parse(Console.ReadLine());
+			int indiceSerie = RecebendoIdSerie();
 
 			var serie = repositorio.RetornaPorId(indiceSerie);
 
 			Console.WriteLine(serie);
 		}
 
+
 		//Caso 6
 		private static void AtivarSerie()
 		{
-			Console.Write("Digite o id da série: ");
-			int indiceSerie = int.Parse(Console.ReadLine());
+			int indiceSerie = RecebendoIdSerie();
 
 			repositorio.Ativar(indiceSerie);
 		}
 
+		//Caso 7
+		private static void ListarSeriesInativas()
+        {
+			Console.WriteLine("Listar séries inativas");
 
+			var lista = repositorio.Lista();
+
+			if (lista.Count == 0)
+			{
+				Console.WriteLine("Nenhuma série encontrada.");
+				return;
+			}
+
+			foreach (var serie in lista)
+			{
+				var excluido = serie.RetornarAtivo();
+				if(excluido)
+					Console.WriteLine("#ID {0}: - {1} {2}", serie.retornaId(), serie.retornaTitulo(), (excluido ? "*Excluído*" : ""));
+			}
+		}
+
+		private static int RecebendoIdSerie()
+        {
+			Console.Write("Digite o id da série: ");
+			int indiceSerie = int.Parse(Console.ReadLine());
+
+			return indiceSerie;
+        }
 
 
 
@@ -206,6 +233,7 @@ namespace DIO.Series
 			Console.WriteLine("4- Inativar série");
 			Console.WriteLine("5- Visualizar série");
 			Console.WriteLine("6- Ativar série");
+			Console.WriteLine("7- Listar séries inativas");
 			Console.WriteLine("C- Limpar Tela");
 			Console.WriteLine("X- Sair");
 			Console.WriteLine();
