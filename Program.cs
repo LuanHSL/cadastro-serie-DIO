@@ -126,10 +126,8 @@ namespace DIO.Series
 					case "S":
 						repositorio.Ativar(indiceSerie);
 						return;
-						//break;
 					case "N":
 						return;
-						//break;
 					default:
 						throw new ArgumentOutOfRangeException();
 				}
@@ -167,7 +165,23 @@ namespace DIO.Series
 		{
 			int indiceSerie = RecebendoIdSerie();
 
-			repositorio.Inativar(indiceSerie);
+			Console.WriteLine();
+			Console.WriteLine("Série inativada, deseja Ativar?");
+			Console.WriteLine("S - Sim");
+			Console.WriteLine("N - Não");
+
+			string opcao = Console.ReadLine().ToUpper();
+
+			switch (opcao)
+            {
+				case "S":
+					repositorio.Inativar(indiceSerie);
+					break;
+				case "N":
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
 		}
         
 		//Caso 5
