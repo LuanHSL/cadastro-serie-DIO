@@ -6,7 +6,7 @@
 
 ### Mudanças Realizadas:
 
-#### Possibilitar a inativação de a série
+#### Possibilitar a inativação da série
 #### Regra de negócio: só é possível atualizar a série se o mesmo estiver ativo
-#### Mostrar lista das séries inativas
+#### Mostrar uma lista das séries inativas
 #### Mostrar mensagem de confirmação ao inativar a série
