@@ -30,7 +30,7 @@ namespace DIO.Series
             retorno += "Titulo: " + this.Titulo + Environment.NewLine;
             retorno += "Descrição: " + this.Descricao + Environment.NewLine;
             retorno += "Ano de Início: " + this.Ano + Environment.NewLine;
-            retorno += "Inativado: " + this.Inativo;
+            retorno += "Inativo: " + this.Inativo;
 			return retorno;
 		}
 

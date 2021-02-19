@@ -28,6 +28,9 @@ namespace DIO.Series
 					case "5":
 						VisualizarSerie();
 						break;
+					case "6":
+						AtivarSerie();
+						break;
 					case "C":
 						Console.Clear();
 						break;
@@ -177,12 +180,21 @@ namespace DIO.Series
 			Console.WriteLine(serie);
 		}
 
+		//Caso 6
+		private static void AtivarSerie()
+		{
+			Console.Write("Digite o id da série: ");
+			int indiceSerie = int.Parse(Console.ReadLine());
+
+			repositorio.Ativar(indiceSerie);
+		}
 
 
 
 
 
-        private static string ObterOpcaoUsuario()
+
+		private static string ObterOpcaoUsuario()
 		{
 			Console.WriteLine();
 			Console.WriteLine("DIO Séries a seu dispor!!!");
@@ -191,8 +203,9 @@ namespace DIO.Series
 			Console.WriteLine("1- Listar séries");
 			Console.WriteLine("2- Inserir nova série");
 			Console.WriteLine("3- Atualizar série");
-			Console.WriteLine("4- Excluir série");
+			Console.WriteLine("4- Inativar série");
 			Console.WriteLine("5- Visualizar série");
+			Console.WriteLine("6- Ativar série");
 			Console.WriteLine("C- Limpar Tela");
 			Console.WriteLine("X- Sair");
 			Console.WriteLine();
